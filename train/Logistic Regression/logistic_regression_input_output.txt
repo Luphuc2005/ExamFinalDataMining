@@ -1,0 +1,174 @@
+LOGISTIC REGRESSION - INPUT, OUTPUT, AND CALCULATION EXAMPLE
+
+1. Model purpose
+
+Logistic Regression is used for binary classification in this project.
+The model predicts whether a hospital encounter belongs to class 0 or class 1.
+
+Target column:
+readmitted_binary
+
+Class meaning:
+0 = not readmitted
+1 = readmitted
+
+
+2. Input of Logistic Regression
+
+The input of the model is a feature vector X for one patient encounter.
+In this project, the original categorical and numerical columns were already preprocessed.
+
+After preprocessing:
+- Numerical columns were scaled/transformed.
+- Categorical columns were converted into one-hot encoded columns.
+- The target column readmitted_binary was removed from X.
+
+Current processed feature shapes:
+X_train: (65128, 291)
+X_val:   (16282, 291)
+X_test:  (20353, 291)
+
+This means each row has 291 input features.
+
+Example input vector for one row:
+X = [x1, x2, x3, ..., x291]
+
+Some example feature names:
+- num__time_in_hospital
+- num__num_lab_procedures
+- num__num_medications
+- num__number_inpatient
+- num__age_ordinal
+- cat__gender_Female
+- cat__gender_Male
+- cat__diabetesMed_No
+- cat__diabetesMed_Yes
+- cat__change_Ch
+- cat__change_No
+
+Important:
+The model does not receive readmitted_binary as input.
+readmitted_binary is only used as y, the true label, during training and evaluation.
+
+
+3. Output of Logistic Regression
+
+For each input row, Logistic Regression produces:
+
+1. A probability score:
+   P(y = 1 | X)
+
+2. A predicted class:
+   0 or 1
+
+By default, sklearn uses threshold 0.5:
+- If P(y = 1 | X) >= 0.5, predict class 1.
+- If P(y = 1 | X) < 0.5, predict class 0.
+
+Example:
+P(y = 1 | X) = 0.73
+Predicted class = 1
+
+Example:
+P(y = 1 | X) = 0.31
+Predicted class = 0
+
+
+4. Logistic Regression formula
+
+Logistic Regression first calculates a linear score z:
+
+z = b + w1*x1 + w2*x2 + w3*x3 + ... + w291*x291
+
+Where:
+- x1, x2, ..., x291 are input features.
+- w1, w2, ..., w291 are learned model coefficients.
+- b is the learned intercept.
+
+Then the model converts z into a probability using the sigmoid function:
+
+P(y = 1 | X) = sigmoid(z) = 1 / (1 + e^(-z))
+
+
+5. Simple calculation example
+
+Assume a simplified Logistic Regression model only uses 3 features:
+
+x1 = num__time_in_hospital
+x2 = num__num_medications
+x3 = cat__diabetesMed_Yes
+
+Assume the learned coefficients are:
+
+b  = -0.40
+w1 =  0.30
+w2 =  0.20
+w3 =  0.80
+
+For one patient encounter, assume:
+
+x1 = 1.50
+x2 = 0.70
+x3 = 1
+
+Step 1: Calculate z
+
+z = b + w1*x1 + w2*x2 + w3*x3
+z = -0.40 + 0.30*1.50 + 0.20*0.70 + 0.80*1
+z = -0.40 + 0.45 + 0.14 + 0.80
+z = 0.99
+
+Step 2: Apply sigmoid
+
+P(y = 1 | X) = 1 / (1 + e^(-0.99))
+P(y = 1 | X) = 0.7291
+
+Step 3: Convert probability to class
+
+Because 0.7291 >= 0.5:
+Predicted class = 1
+
+Interpretation:
+The model predicts that this patient encounter belongs to class 1, meaning readmitted.
+
+
+6. Evaluation outputs used in this project
+
+The model is evaluated using:
+
+Accuracy:
+The proportion of correct predictions among all predictions.
+
+Precision:
+Among the samples predicted as class 1, how many are actually class 1.
+
+Recall:
+Among the actual class 1 samples, how many were correctly detected.
+
+F1-score:
+The harmonic mean of precision and recall.
+
+Confusion Matrix:
+A table showing correct and incorrect predictions for each class.
+
+ROC Curve:
+A curve showing the trade-off between true positive rate and false positive rate.
+
+Precision-Recall Curve:
+A curve showing the trade-off between precision and recall for different thresholds.
+
+
+7. Confusion Matrix layout
+
+For binary classification:
+
+                 Predicted 0    Predicted 1
+Actual 0              TN             FP
+Actual 1              FN             TP
+
+Where:
+- TN = True Negative
+- FP = False Positive
+- FN = False Negative
+- TP = True Positive
+
