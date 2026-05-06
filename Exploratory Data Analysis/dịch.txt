@@ -1,0 +1,52 @@
+| Cột                        | Ý nghĩa                                                                                            |
+| -------------------------- | -------------------------------------------------------------------------------------------------- |
+| `encounter_id`             | Mã định danh cho **một lần khám/nhập viện**. Mỗi lần nhập viện có ID riêng.                        |
+| `patient_nbr`              | Mã định danh **bệnh nhân**. Một bệnh nhân có thể xuất hiện nhiều lần nếu nhập viện nhiều lần.      |
+| `race`                     | Chủng tộc của bệnh nhân, ví dụ Caucasian, AfricanAmerican, Asian,...                               |
+| `gender`                   | Giới tính: Male, Female, Unknown/Invalid.                                                          |
+| `age`                      | Nhóm tuổi, ví dụ `[0-10)`, `[10-20)`, ..., `[90-100)`.                                             |
+| `weight`                   | Cân nặng, thường bị thiếu rất nhiều, ví dụ `[75-100)`, `?`.                                        |
+| `admission_type_id`        | Mã loại nhập viện, ví dụ cấp cứu, chuyển viện, tự nguyện,... Cần tra bảng mapping ID.              |
+| `discharge_disposition_id` | Mã tình trạng khi xuất viện, ví dụ về nhà, chuyển viện, tử vong,...                                |
+| `admission_source_id`      | Mã nguồn nhập viện, ví dụ từ phòng cấp cứu, từ bác sĩ giới thiệu, từ bệnh viện khác,...            |
+| `time_in_hospital`         | Số ngày bệnh nhân nằm viện. Đây là biến số rất quan trọng.                                         |
+| `payer_code`               | Mã đơn vị chi trả/bảo hiểm, ví dụ Medicare, Medicaid,... Thường có nhiều giá trị thiếu.            |
+| `medical_specialty`        | Chuyên khoa điều trị chính, ví dụ Cardiology, InternalMedicine, Surgery,...                        |
+| `num_lab_procedures`       | Số xét nghiệm cận lâm sàng đã thực hiện.                                                           |
+| `num_procedures`           | Số thủ thuật/phẫu thuật đã thực hiện, không tính xét nghiệm lab.                                   |
+| `num_medications`          | Tổng số loại thuốc được kê trong lần nhập viện.                                                    |
+| `number_outpatient`        | Số lần khám ngoại trú của bệnh nhân trước lần nhập viện này.                                       |
+| `number_emergency`         | Số lần bệnh nhân vào cấp cứu trước đó.                                                             |
+| `number_inpatient`         | Số lần bệnh nhân nhập viện nội trú trước đó.                                                       |
+| `diag_1`                   | Chẩn đoán chính, thường là mã ICD-9.                                                               |
+| `diag_2`                   | Chẩn đoán phụ thứ nhất.                                                                            |
+| `diag_3`                   | Chẩn đoán phụ thứ hai.                                                                             |
+| `number_diagnoses`         | Tổng số chẩn đoán được ghi nhận.                                                                   |
+| `max_glu_serum`            | Kết quả xét nghiệm glucose huyết thanh cao nhất. Giá trị có thể là `None`, `Norm`, `>200`, `>300`. |
+| `A1Cresult`                | Kết quả xét nghiệm HbA1c. Giá trị có thể là `None`, `Norm`, `>7`, `>8`.                            |
+| `metformin`                | Trạng thái dùng thuốc Metformin: `No`, `Steady`, `Up`, `Down`.                                     |
+| `repaglinide`              | Trạng thái dùng thuốc Repaglinide.                                                                 |
+| `nateglinide`              | Trạng thái dùng thuốc Nateglinide.                                                                 |
+| `chlorpropamide`           | Trạng thái dùng thuốc Chlorpropamide.                                                              |
+| `glimepiride`              | Trạng thái dùng thuốc Glimepiride.                                                                 |
+| `acetohexamide`            | Trạng thái dùng thuốc Acetohexamide.                                                               |
+| `glipizide`                | Trạng thái dùng thuốc Glipizide.                                                                   |
+| `glyburide`                | Trạng thái dùng thuốc Glyburide.                                                                   |
+| `tolbutamide`              | Trạng thái dùng thuốc Tolbutamide.                                                                 |
+| `pioglitazone`             | Trạng thái dùng thuốc Pioglitazone.                                                                |
+| `rosiglitazone`            | Trạng thái dùng thuốc Rosiglitazone.                                                               |
+| `acarbose`                 | Trạng thái dùng thuốc Acarbose.                                                                    |
+| `miglitol`                 | Trạng thái dùng thuốc Miglitol.                                                                    |
+| `troglitazone`             | Trạng thái dùng thuốc Troglitazone.                                                                |
+| `tolazamide`               | Trạng thái dùng thuốc Tolazamide.                                                                  |
+| `examide`                  | Trạng thái dùng thuốc Examide. Cột này thường gần như không có giá trị hữu ích.                    |
+| `citoglipton`              | Trạng thái dùng thuốc Citoglipton. Cột này cũng thường ít/không có biến thiên.                     |
+| `insulin`                  | Trạng thái dùng insulin: `No`, `Steady`, `Up`, `Down`. Đây là cột rất quan trọng.                  |
+| `glyburide-metformin`      | Trạng thái dùng thuốc kết hợp Glyburide + Metformin.                                               |
+| `glipizide-metformin`      | Trạng thái dùng thuốc kết hợp Glipizide + Metformin.                                               |
+| `glimepiride-pioglitazone` | Trạng thái dùng thuốc kết hợp Glimepiride + Pioglitazone.                                          |
+| `metformin-rosiglitazone`  | Trạng thái dùng thuốc kết hợp Metformin + Rosiglitazone.                                           |
+| `metformin-pioglitazone`   | Trạng thái dùng thuốc kết hợp Metformin + Pioglitazone.                                            |
+| `change`                   | Có thay đổi thuốc tiểu đường trong quá trình điều trị hay không. Thường là `Ch` hoặc `No`.         |
+| `diabetesMed`              | Bệnh nhân có được kê thuốc điều trị tiểu đường hay không: `Yes` hoặc `No`.                         |
+| `readmitted`               | Nhãn mục tiêu: bệnh nhân có tái nhập viện không. Thường có 3 giá trị: `<30`, `>30`, `NO`.          |
